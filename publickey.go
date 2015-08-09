@@ -9,23 +9,28 @@ import (
 func FetchPublicKey(userName string, config *Config) (*keypairs.KeyPair, error) {
 
 	regionOpts := gophercloud.EndpointOpts{Region: config.Region}
-	provider := initClient(config)
+	provider, err := initClient(config)
+
+	if err != nil {
+		return nil, err
+	}
+
 	computeClient, err := openstack.NewComputeV2(provider, regionOpts)
 
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	key, err := FindKeyPairByName(computeClient, userName)
 
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 
 	return key, nil
 }
 
-func initClient(config *Config) *gophercloud.ProviderClient {
+func initClient(config *Config) (*gophercloud.ProviderClient, error) {
 	opts := gophercloud.AuthOptions{
 		IdentityEndpoint: config.Auth_Url,
 		Username:         config.User,
@@ -34,7 +39,7 @@ func initClient(config *Config) *gophercloud.ProviderClient {
 	}
 	client, err := openstack.AuthenticatedClient(opts)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	return client
+	return client, nil
 }

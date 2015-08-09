@@ -1,8 +1,10 @@
 package openstack_ssh
 
-import "github.com/BurntSushi/toml"
+import (
+	"github.com/BurntSushi/toml"
+)
 
-const filePath = "/etc/openstack-ssh.conf"
+var configFilePath = "/etc/ssh/openstack-ssh.conf"
 
 type Config struct {
 	Auth_Url string
@@ -12,14 +14,14 @@ type Config struct {
 	Region   string
 }
 
-func LoadConfig() *Config {
+func LoadConfig() (*Config, error) {
 	var config Config
 	defaultConfig(&config)
-	_, err := toml.DecodeFile(filePath, &config)
+	_, err := toml.DecodeFile(configFilePath, &config)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
-	return &config
+	return &config, nil
 }
 
 func defaultConfig(config *Config) {

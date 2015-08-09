@@ -8,11 +8,19 @@ import (
 )
 
 func main() {
+
 	flag.Parse()
-	config := app.LoadConfig()
+	config, err := app.LoadConfig()
+
+	if err != nil {
+		app.ERR(err)
+		panic(err)
+	}
+
 	key, err := app.FetchPublicKey(flag.Arg(0), config)
 
 	if err != nil {
+		app.ERR(err)
 		panic(err)
 	}
 

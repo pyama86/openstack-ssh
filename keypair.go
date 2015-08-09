@@ -9,7 +9,7 @@ func FindKeyPairByName(cli *gophercloud.ServiceClient, name string) (*keypairs.K
 	result := keypairs.Get(cli, name)
 	keypair, err := result.Extract()
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
 	return keypair, nil
 }
