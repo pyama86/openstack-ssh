@@ -7,9 +7,17 @@ import (
 	app "github.com/pyama86/openstack-ssh"
 )
 
-func main() {
+const Version string = "0.1.0"
 
+func main() {
+	var versionFlg bool
+	flag.BoolVar(&versionFlg, "v", false, "show version")
 	flag.Parse()
+
+	if versionFlg {
+		fmt.Println("openstack-ssh version:", Version)
+		return
+	}
 	if flag.Arg(0) == "" {
 		panic("please input username")
 	}
