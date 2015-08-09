@@ -24,19 +24,19 @@ https://github.com/pyama86/openstack-ssh/releases
  ```
 
 ## Usage
- create user `pyama` to server
+ create user `hoge` to server
 ```
-[root@test-server.com] useradd pyama
+[root@test-server.com] useradd hoge
 ```
 
 create key-pair
 
 ```
-nova keypair-add --pub-key ~/.ssh/github_rsa.pub pyama
+nova keypair-add --pub-key ~/.ssh/github_rsa.pub hoge
 ```
 login
 ```
-ssh pyama@test-server.com
+ssh hoge@test-server.com
 ```
 
 
