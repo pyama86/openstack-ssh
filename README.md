@@ -1,4 +1,6 @@
 # openstack-ssh
+[![Build Status](https://travis-ci.org/pyama86/openstack-ssh.svg?branch=master)](https://travis-ci.org/pyama86/openstack-ssh)
+
 ssh authentication key by openstack key-pair wrapper
 
 ## Installation
