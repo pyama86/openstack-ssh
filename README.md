@@ -21,32 +21,32 @@ https://github.com/pyama86/openstack-ssh/releases
  AuthorizedKeysCommandUser nobody
  ```
 
- ## Usage
+## Usage
  create user `pyama` to server
-  ```
-   [root@test-server.com] useradd pyama
-    ```
-     
-      create key-pair
+```
+[root@test-server.com] useradd pyama
+```
 
-      ```
-      nova keypair-add --pub-key ~/.ssh/github_rsa.pub pyama
-      ```
-      login
-      ```
-      ssh pyama@test-server.com
-      ```
+create key-pair
 
-
-      ## Contributing
-
-      1. Fork it!
-      2. Create your feature branch: `git checkout -b my-new-feature`
-      3. Commit your changes: `git commit -am 'Add some feature'`
-      4. Push to the branch: `git push origin my-new-feature`
-      5. Submit a pull request :D
+```
+nova keypair-add --pub-key ~/.ssh/github_rsa.pub pyama
+```
+login
+```
+ssh pyama@test-server.com
+```
 
 
-      ## License
+## Contributing
 
-      MIT
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
+
+
+## License
+
+MIT
