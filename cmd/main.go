@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 
 	app "github.com/pyama86/openstack-ssh"
 )
@@ -9,5 +10,11 @@ import (
 func main() {
 	flag.Parse()
 	config := app.LoadConfig()
-	app.FetchPublicKey(flag.Arg(0), config)
+	key, err := app.FetchPublicKey(flag.Arg(0), config)
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println(key.PublicKey)
 }

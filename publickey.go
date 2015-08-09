@@ -1,24 +1,28 @@
 package openstack_ssh
 
 import (
-	"fmt"
-
 	"github.com/rackspace/gophercloud"
 	"github.com/rackspace/gophercloud/openstack"
+	"github.com/rackspace/gophercloud/openstack/compute/v2/extensions/keypairs"
 )
 
-func FetchPublicKey(userName string, config *Config) {
+func FetchPublicKey(userName string, config *Config) (*keypairs.KeyPair, error) {
 
-	fmt.Println(config.Region)
 	regionOpts := gophercloud.EndpointOpts{Region: config.Region}
-
 	provider := initClient(config)
-
 	computeClient, err := openstack.NewComputeV2(provider, regionOpts)
+
 	if err != nil {
 		panic(err)
 	}
-	FindKeyPairByName(computeClient, userName)
+
+	key, err := FindKeyPairByName(computeClient, userName)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return key, nil
 }
 
 func initClient(config *Config) *gophercloud.ProviderClient {
